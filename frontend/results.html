@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neptune Search</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&family=Space+Mono&display=swap" rel="stylesheet" />
+</head>
+<body class="results-page">
+
+  <canvas id="stars"></canvas>
+
+  <header class="results-header">
+    <a href="index.html" class="logo compact">
+      <span class="logo-dot"></span>
+      <span class="logo-text">Neptune</span>
+    </a>
+
+    <form class="search-form compact" id="resultsForm" onsubmit="doSearch(event)">
+      <div class="search-box">
+        <span class="search-icon">◎</span>
+        <input
+          type="text"
+          id="resultsQuery"
+          class="search-input"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button type="submit" class="search-btn">Search</button>
+      </div>
+      <div class="search-suggestions" id="suggestions"></div>
+    </form>
+
+    <div class="header-spacer"></div>
+  </header>
+
+  <main class="results-main">
+    <!-- AI instant answer (shown when AI has a direct response) -->
+    <div id="instantAnswer" class="instant-answer hidden"></div>
+
+    <!-- AI summary bar -->
+    <div id="aiSummary" class="ai-summary hidden"></div>
+
+    <!-- Stats bar -->
+    <div id="statsBar" class="stats-bar hidden"></div>
+
+    <!-- Results list -->
+    <div id="resultsList" class="results-list"></div>
+
+    <!-- Pagination -->
+    <div id="pagination" class="pagination hidden"></div>
+
+    <!-- Loading state -->
+    <div id="loading" class="loading-state">
+      <div class="loading-orb"></div>
+      <p>Searching the cosmos...</p>
+    </div>
+
+    <!-- Empty state -->
+    <div id="emptyState" class="empty-state hidden">
+      <div class="empty-icon">◎</div>
+      <h2>No results found</h2>
+      <p>Try different keywords, or <a href="index.html">start over</a>.</p>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

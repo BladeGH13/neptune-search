@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: neptune-search-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: INDEX_DIR
+        value: /data/index
+      - key: CRAWLER_SECRET
+        sync: false         # Set manually in Render dashboard (keep secret)
+      - key: ALLOWED_ORIGINS
+        value: "https://yourusername.github.io,https://neptunebrowser.com"
+    disk:
+      name: index-data
+      mountPath: /data
+      sizeGB: 1             # Free tier disk

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neptune Search</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600&family=Space+Mono&display=swap" rel="stylesheet" />
+</head>
+<body class="home">
+
+  <!-- Animated starfield background -->
+  <canvas id="stars"></canvas>
+
+  <!-- Planet glow orb -->
+  <div class="planet-orb"></div>
+
+  <header class="home-header">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span class="logo-text">Neptune</span>
+    </div>
+    <nav>
+      <a href="#" class="nav-link">About</a>
+      <a href="#" class="nav-link">BLUOM</a>
+    </nav>
+  </header>
+
+  <main class="home-main">
+    <div class="hero">
+      <h1 class="hero-title">
+        <span class="title-neptune">Neptune</span>
+        <span class="title-search">Search</span>
+      </h1>
+      <p class="hero-sub">Explore the web. Powered by BLUOM.</p>
+
+      <form class="search-form" id="homeForm" onsubmit="doSearch(event)">
+        <div class="search-box">
+          <span class="search-icon">◎</span>
+          <input
+            type="text"
+            id="homeQuery"
+            class="search-input"
+            placeholder="Search the web..."
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button type="submit" class="search-btn">Search</button>
+        </div>
+        <div class="search-suggestions" id="suggestions"></div>
+      </form>
+
+      <div class="quick-links">
+        <span>Try:</span>
+        <a href="results.html?q=neptune+planet" class="quick-link">neptune planet</a>
+        <a href="results.html?q=space+exploration" class="quick-link">space exploration</a>
+        <a href="results.html?q=web+development" class="quick-link">web development</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="home-footer">
+    <span>© 2025 BLUOM Tech</span>
+    <span class="footer-dot">·</span>
+    <a href="#" class="footer-link">Privacy</a>
+    <span class="footer-dot">·</span>
+    <a href="#" class="footer-link">Neptune Browser</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

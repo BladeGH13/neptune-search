@@ -1,0 +1,51 @@
+name: Neptune Crawler
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # Every 6 hours, 24/7
+  workflow_dispatch:          # Also runnable manually from GitHub UI
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300      # 5-hour cap (GitHub free limit is 6hrs)
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # Restore crawl state from previous run (so we don't re-crawl everything)
+      - name: Restore crawl state
+        uses: actions/cache@v4
+        with:
+          path: data/crawl-state
+          key: crawl-state-${{ github.run_number }}
+          restore-keys: crawl-state-
+
+      - name: Run crawler
+        env:
+          NEPTUNE_API_URL: ${{ secrets.NEPTUNE_API_URL }}
+          CRAWLER_SECRET: ${{ secrets.Waffles2013 }}
+          MAX_PAGES: "4000"
+        run: |
+          cd backend/crawler
+          scrapy crawl neptune \
+            -a seeds="${{ vars.SEED_URLS }}" \
+            -a max_pages=$MAX_PAGES \
+            -s JOBDIR=../../data/crawl-state
+
+      - name: Save crawl state
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/crawl-state
+          key: crawl-state-${{ github.run_number }}
